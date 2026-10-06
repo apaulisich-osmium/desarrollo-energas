@@ -424,22 +424,21 @@ HTML_TEMPLATE = r"""<!doctype html>
 <title>Dashboard Proyección Semanal</title>
 <style>
 :root{color-scheme:light;
---bg:#f4f4f2;--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--muted:#77756f;--line:#e4e3de;--grid:#ecebe7;
---accent:#2a78d6;--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--realbg:#e8f1fc;--zone:#f1f0ec;--sec:#efeee9;
---good:#1a7f37;--bad:#c4302b}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;
---bg:#111110;--surface:#1a1a19;--ink:#fff;--ink2:#c3c2b7;--muted:#97968d;--line:#2e2e2b;--grid:#262624;
---accent:#3987e5;--s1:#3987e5;--s2:#d95926;--s3:#199e70;--realbg:#17263a;--zone:#21211f;--sec:#242422;
---good:#4fbf6b;--bad:#ef6b66}}
-:root[data-theme="dark"]{color-scheme:dark;
---bg:#111110;--surface:#1a1a19;--ink:#fff;--ink2:#c3c2b7;--muted:#97968d;--line:#2e2e2b;--grid:#262624;
---accent:#3987e5;--s1:#3987e5;--s2:#d95926;--s3:#199e70;--realbg:#17263a;--zone:#21211f;--sec:#242422;
---good:#4fbf6b;--bad:#ef6b66}
+/* Paleta LPS Energy: #006633 #000000 #333366 #6699CC #000033 #999999 #666666 (+ tonos derivados) */
+--bg:#f4f4f4;--surface:#fff;--ink:#000;--ink2:#333366;--muted:#666;--line:#d6d6d6;--grid:#e6e6e6;
+--navy:#000033;--accent:#006633;--s1:#006633;--s2:#47478f;--s3:#5b8fd1;
+--realbg:#e3ecf6;--zone:#ececec;--sec:#c9d9ec;--head:#333366;--head2:#e3ecf6;
+--good:#006633;--bad:#333366}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 Calibri,Carlito,"Segoe UI",Arial,sans-serif}
+button,select,input{font-family:inherit}
 .wrap{max-width:1280px;margin:0 auto;padding:24px 16px 40px}
-h1{font-size:22px;margin:0 0 2px;letter-spacing:-.01em}
-h2{font-size:15px;margin:0}
+.brand{background:var(--navy);color:#fff;border-bottom:4px solid var(--accent)}
+.brand .wrap{padding:20px 16px 16px}
+.brand .sub{color:#c9d9ec;margin:0}
+.brand a{color:#fff}
+h1{font-size:26px;margin:0 0 2px;font-weight:700}
+h2{font-size:17px;margin:0;color:var(--navy)}
 .sub{color:var(--ink2);margin:0 0 16px}
 a{color:var(--accent)}
 .filters{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;
@@ -454,13 +453,13 @@ select,input[type=date]{font:inherit;font-size:13px;padding:5px 8px;border:1px s
 button.btn{font:inherit;font-size:13px;padding:5px 10px;border:1px solid var(--line);border-radius:6px;
   background:var(--surface);color:var(--ink);cursor:pointer}
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:16px}
-.kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
-.kpi .t{color:var(--ink2);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.kpi{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:6px;padding:12px 14px}
+.kpi .t{color:var(--ink2);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 .kpi .v{font-size:26px;font-weight:600;font-variant-numeric:tabular-nums;margin:2px 0}
 .kpi .v small{font-size:13px;font-weight:400;color:var(--ink2)}
 .kpi .d{font-size:12px;color:var(--ink2);font-variant-numeric:tabular-nums}
 .up{color:var(--good)}.down{color:var(--bad)}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px;margin-bottom:16px}
 .card-h{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;margin-bottom:10px}
 .tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
@@ -481,11 +480,14 @@ button.btn{font:inherit;font-size:13px;padding:5px 10px;border:1px solid var(--l
 .scroll{overflow-x:auto;max-height:70vh;overflow-y:auto}
 table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:13px}
 th,td{padding:4px 8px;border-bottom:1px solid var(--grid);white-space:nowrap;text-align:right}
-thead th{position:sticky;top:0;background:var(--surface);font-weight:600;z-index:1}
-thead tr:nth-child(2) th{top:26px;font-weight:400;color:var(--ink2);font-size:12px}
+thead th{position:sticky;top:0;background:var(--head);color:#fff;font-weight:700;z-index:1}
+thead th:first-child{background:var(--head)}
+thead .note{color:#c9d9ec}
+thead tr:nth-child(2) th{top:26px;font-weight:400;background:var(--head2);color:var(--ink2);font-size:12px}
+thead tr:nth-child(2) th.r{background:#9fbde0;color:var(--navy)}
 th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:var(--surface);z-index:2}
 td.r,th.r{background:var(--realbg)}
-tr.sec td{background:var(--sec);font-weight:600}
+tr.sec td{background:var(--sec);font-weight:700;color:var(--navy)}
 td.sub1{padding-left:24px}
 td.na{color:var(--muted)}
 .tabs{display:flex;gap:4px;margin-bottom:12px}
@@ -493,9 +495,11 @@ td.na{color:var(--muted)}
 </style>
 </head>
 <body>
-<div class="wrap">
+<header class="brand"><div class="wrap">
   <h1>Proyección Semanal de la Demanda del Sistema de Transporte</h1>
   <p class="sub" id="sub"></p>
+</div></header>
+<div class="wrap">
 
   <div class="filters">
     <label>Mostrar
@@ -769,7 +773,6 @@ function render(){
   renderKpis(); renderChart(); renderTabla(); renderArchivo();
 }
 let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(renderChart, 150); });
-matchMedia("(prefers-color-scheme: dark)").addEventListener("change", renderChart);
 render();
 </script>
 </body>

@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+# credencial de la cuenta de servicio de Google: nunca al repo
+credentials.json

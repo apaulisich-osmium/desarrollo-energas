@@ -1,4 +1,6 @@
 pdfplumber
+pymupdf
 requests
+openpyxl
 gspread
 google-auth

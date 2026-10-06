@@ -2,5 +2,9 @@
 __pycache__/
 *.pyc
 .DS_Store
-# credencial de la cuenta de servicio de Google: nunca al repo
+# Credenciales de Google: nunca al repo
+# cuenta de servicio (proyección semanal)
 credentials.json
+# cliente OAuth y token (partes de transporte)
+credenciales.json
+token_google.json

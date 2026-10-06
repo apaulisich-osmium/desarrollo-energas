@@ -9,6 +9,10 @@ Extractores de datos operativos publicados por ENARGAS.
 
 Instalación común: `pip install -r requirements.txt`.
 
+**Pantalla principal:** abrir [`index.html`](index.html) en el navegador. Tiene un botón para cada módulo:
+`data/proyeccion_semanal.html` (Proyección Semanal) y `salida/transporte_diario.html` (Partes de Transporte).
+Cada dashboard se regenera al correr su script.
+
 Ambos módulos escriben en la misma planilla de Google Sheets, en pestañas distintas.
 
 ---
@@ -72,7 +76,8 @@ python enargas_transporte.py 2026-09-01 2026-10-01 --sheets   # además actualiz
 ```
 
 - Los PDFs se guardan en `data/pdf_transporte/AAAAMMDD.pdf` y no se vuelven a descargar.
-- La tabla resultante queda en `salida/transporte_diario.csv` y `salida/transporte_diario.xlsx` (una fila por día operativo).
+- La tabla resultante queda en `salida/transporte_diario.csv` y `salida/transporte_diario.xlsx` (una fila por día operativo). Cada corrida se suma a lo ya acumulado.
+- Dashboard: `salida/transporte_diario.html` (plantilla en `plantillas/dashboard_transporte.html`).
 
 ### Columnas
 

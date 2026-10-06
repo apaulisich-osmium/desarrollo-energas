@@ -307,7 +307,7 @@ def parsear(pdf: Path) -> dict:
     suma_gto = d["iny_gto_norte"] + d["iny_gto_centro_oeste"] + d["iny_gto_neuba_I_y_II"] + d["iny_gto_san_martin"]
     if abs(suma_cuenca - suma_gto) > 0.25:
         avisos.append(f"suma cuencas {suma_cuenca:.1f} != suma gasoductos {suma_gto:.1f}")
-    d["iny_no_asignada"] = round(d["iny_total"] - suma_gto, 1)
+    d["iny_no_asignada"] = round(d["iny_total"] - suma_gto, 1) + 0.0  # + 0.0 evita "-0.0"
     if abs(d["lp_tgn_actual"] + d["lp_tgs_actual"] - d["lp_total_actual"]) > 0.25:
         avisos.append("line pack TGN+TGS != total")
     if abs(d["lp_tgn_dif"] + d["lp_tgs_dif"] - d["lp_total_dif"]) > 0.25:
@@ -318,12 +318,36 @@ def parsear(pdf: Path) -> dict:
 
 # ---------------------------------------------------------------- salida
 
+def _a_valor(v):
+    if v in (None, ""):
+        return None
+    try:
+        return float(v)
+    except ValueError:
+        return v
+
+
+def acumular(filas: list[dict]) -> list[dict]:
+    """Combina con el CSV existente (por fecha), así cada corrida suma días sin perder los anteriores."""
+    previas = {}
+    archivo = DIR_SALIDA / "transporte_diario.csv"
+    if archivo.exists():
+        with open(archivo, encoding="utf-8-sig") as f:
+            for r in csv.DictReader(f):
+                previas[r["fecha"]] = {c: (r.get(c) if c == "fecha" or c.endswith("_fecha") else _a_valor(r.get(c)))
+                                       for c in COLUMNAS}
+    for r in filas:
+        previas[r["fecha"]] = r
+    return [previas[k] for k in sorted(previas)]
+
+
 def guardar(filas: list[dict]):
     DIR_SALIDA.mkdir(exist_ok=True)
     with open(DIR_SALIDA / "transporte_diario.csv", "w", newline="", encoding="utf-8-sig") as f:
         w = csv.DictWriter(f, fieldnames=COLUMNAS, extrasaction="ignore")
         w.writeheader()
         w.writerows(filas)
+    generar_dashboard(filas)
     try:
         import openpyxl
         wb = openpyxl.Workbook()
@@ -336,6 +360,15 @@ def guardar(filas: list[dict]):
         wb.save(DIR_SALIDA / "transporte_diario.xlsx")
     except ImportError:
         pass
+
+
+def generar_dashboard(filas: list[dict]):
+    """Dashboard HTML autocontenido (salida/transporte_diario.html) a partir de la plantilla."""
+    import json
+    plantilla = (RAIZ / "plantillas" / "dashboard_transporte.html").read_text(encoding="utf-8")
+    datos = json.dumps([{c: r.get(c) for c in COLUMNAS} for r in filas], ensure_ascii=False)
+    html = plantilla.replace("__DATA__", datos.replace("</", "<\\/"))
+    (DIR_SALIDA / "transporte_diario.html").write_text(html, encoding="utf-8")
 
 
 def conectar_google(credenciales: Path):
@@ -394,8 +427,11 @@ def main():
             print(f"  AVISO {f}: {'; '.join(r['_avisos'])}")
         filas.append(r)
 
+    nuevas = filas
+    filas = acumular(nuevas)
     guardar(filas)
-    print(f"{len(filas)} días guardados en {DIR_SALIDA}")
+    print(f"{len(nuevas)} días procesados; {len(filas)} días acumulados en {DIR_SALIDA}")
+    print(f"Dashboard: {DIR_SALIDA / 'transporte_diario.html'}")
     if a.sheets:
         subir_a_sheets(filas, a.credenciales)
         print(f"Hoja '{SHEET_TAB}' actualizada")

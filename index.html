@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Desarrollo ENARGAS</title>
+<style>
+:root{color-scheme:light;
+--bg:#f4f4f2;--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--muted:#77756f;--line:#e4e3de;--accent:#2a78d6;--s2:#eb6834}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;
+--bg:#111110;--surface:#1a1a19;--ink:#fff;--ink2:#c3c2b7;--muted:#97968d;--line:#2e2e2b;--accent:#3987e5;--s2:#d95926}}
+:root[data-theme="dark"]{color-scheme:dark;
+--bg:#111110;--surface:#1a1a19;--ink:#fff;--ink2:#c3c2b7;--muted:#97968d;--line:#2e2e2b;--accent:#3987e5;--s2:#d95926}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);
+  font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;flex-direction:column}
+header{max-width:1100px;width:100%;margin:0 auto;padding:40px 16px 8px}
+h1{font-size:26px;margin:0 0 4px;letter-spacing:-.01em}
+.sub{color:var(--ink2);margin:0}
+main{flex:1;max-width:1100px;width:100%;margin:0 auto;padding:24px 16px 40px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:20px;align-content:start}
+a.op{display:flex;flex-direction:column;gap:10px;min-height:260px;padding:28px;text-decoration:none;color:inherit;
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;border-top:4px solid var(--c);
+  transition:transform .12s ease,box-shadow .12s ease}
+a.op:hover,a.op:focus-visible{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.10);outline:none}
+a.op:focus-visible{box-shadow:0 0 0 3px var(--c)}
+.ico{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;background:var(--c);color:#fff}
+.op h2{font-size:20px;margin:6px 0 0}
+.op p{margin:0;color:var(--ink2)}
+.op ul{margin:0;padding-left:18px;color:var(--ink2);font-size:14px}
+.go{margin-top:auto;font-weight:600;color:var(--c)}
+.autor{font-size:12px;color:var(--muted)}
+footer{max-width:1100px;width:100%;margin:0 auto;padding:0 16px 24px;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Desarrollo ENARGAS</h1>
+  <p class="sub">Datos operativos del sistema de transporte de gas natural publicados por ENARGAS.</p>
+</header>
+<main>
+  <a class="op" href="data/proyeccion_semanal.html" style="--c:var(--accent)">
+    <div class="ico" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
+    </div>
+    <h2>Proyección Semanal de la Demanda</h2>
+    <p>Programado, real y proyectado de la demanda del sistema de transporte.</p>
+    <ul><li>Real vs. proyectado por concepto</li><li>Serie acumulada desde el 01/10/2026</li><li>Archivos originales de cada semana</li></ul>
+    <span class="autor">Desarrollo: Leonardo Monsalvo</span>
+    <span class="go">Abrir →</span>
+  </a>
+  <a class="op" href="salida/transporte_diario.html" style="--c:var(--s2)">
+    <div class="ico" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h5l3-6 4 12 3-6h5"/></svg>
+    </div>
+    <h2>Partes Diarios de Transporte</h2>
+    <p>Parte diario operativo de las licenciatarias de transporte (TGN y TGS).</p>
+    <ul><li>Inyección por cuenca y por gasoducto</li><li>Egresos por tramo y total a Buenos Aires</li><li>Line pack y su variación diaria</li><li>Pronóstico térmico de Capital Federal</li></ul>
+    <span class="autor">Desarrollo: Pablo Alberio</span>
+    <span class="go">Abrir →</span>
+  </a>
+</main>
+<footer>Fuente: ENARGAS. Datos provisorios suministrados por las licenciatarias.</footer>
+</body>
+</html>

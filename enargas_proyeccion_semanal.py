@@ -434,7 +434,9 @@ body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 Calibri,Carli
 button,select,input{font-family:inherit}
 .wrap{max-width:1280px;margin:0 auto;padding:24px 16px 40px}
 .brand{background:var(--navy);color:#fff;border-bottom:4px solid var(--accent)}
-.brand .wrap{padding:20px 16px 16px}
+.brand .wrap{padding:20px 16px 16px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.logo{flex:none;height:76px;width:auto;background:#fff;border-radius:6px;padding:6px 10px}
+@media (max-width:640px){.logo{height:52px;padding:4px 6px}}
 .brand .sub{color:#c9d9ec;margin:0}
 .brand a{color:#fff}
 .brand .back{display:inline-block;margin-bottom:8px;font-size:13px;text-decoration:none;opacity:.85}
@@ -498,9 +500,12 @@ td.na{color:var(--muted)}
 </head>
 <body>
 <header class="brand"><div class="wrap">
-  <a class="back" href="../index.html">← Inicio</a>
-  <h1>Proyección Semanal de la Demanda del Sistema de Transporte</h1>
-  <p class="sub" id="sub"></p>
+  <div>
+    <a class="back" href="../index.html">← Inicio</a>
+    <h1>Proyección Semanal de la Demanda del Sistema de Transporte</h1>
+    <p class="sub" id="sub"></p>
+  </div>
+  <img class="logo" src="../assets/logo_lps.jpg" alt="LPS Energy">
 </div></header>
 <div class="wrap">
 

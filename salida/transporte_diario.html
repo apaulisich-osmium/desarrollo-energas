@@ -21,6 +21,9 @@
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 Calibri,Carlito,"Segoe UI",Arial,sans-serif}
 button,select,input{font-family:inherit}
 .wrap{max-width:1280px;margin:0 auto;padding:24px 16px 40px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:8px}
+.logo{flex:none;height:76px;width:auto;background:#fff;border-radius:6px;padding:6px 10px}
+@media (max-width:640px){.logo{height:52px;padding:4px 6px}}
 .back{display:inline-block;margin-bottom:10px;font-size:13px;color:var(--accent);text-decoration:none}
 .back:hover{text-decoration:underline}
 h1{font-size:22px;margin:0 0 2px;letter-spacing:-.01em}
@@ -78,9 +81,14 @@ td.na{color:var(--muted)}
 </head>
 <body>
 <div class="wrap">
-  <a class="back" href="../index.html">← Inicio</a>
-  <h1>Partes Diarios de Transporte</h1>
-  <p class="sub" id="sub"></p>
+  <div class="top">
+    <div>
+      <a class="back" href="../index.html">← Inicio</a>
+      <h1>Partes Diarios de Transporte</h1>
+      <p class="sub" id="sub"></p>
+    </div>
+    <img class="logo" src="../assets/logo_lps.jpg" alt="LPS Energy">
+  </div>
 
   <div class="filters">
     <div class="seg" id="rangos">

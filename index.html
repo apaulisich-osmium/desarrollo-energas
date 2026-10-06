@@ -14,7 +14,9 @@
 *{box-sizing:border-box}
 body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);
   font:16px/1.5 Calibri,Carlito,"Segoe UI",Arial,sans-serif;display:flex;flex-direction:column}
-header{max-width:1100px;width:100%;margin:0 auto;padding:40px 16px 8px}
+header{max-width:1100px;width:100%;margin:0 auto;padding:32px 16px 8px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.logo{flex:none;height:110px;width:auto;background:#fff;border-radius:8px;padding:6px 10px}
+@media (max-width:640px){.logo{height:64px}}
 h1{font-size:26px;margin:0 0 4px;letter-spacing:-.01em}
 .sub{color:var(--ink2);margin:0}
 main{flex:1;max-width:1100px;width:100%;margin:0 auto;padding:24px 16px 40px;
@@ -35,8 +37,11 @@ footer{max-width:1100px;width:100%;margin:0 auto;padding:0 16px 24px;color:var(-
 </head>
 <body>
 <header>
-  <h1>Desarrollo ENARGAS</h1>
-  <p class="sub">Datos operativos del sistema de transporte de gas natural publicados por ENARGAS.</p>
+  <div>
+    <h1>Desarrollo ENARGAS</h1>
+    <p class="sub">Datos operativos del sistema de transporte de gas natural publicados por ENARGAS.</p>
+  </div>
+  <img class="logo" src="assets/logo_lps.jpg" alt="LPS Energy">
 </header>
 <main>
   <a class="op" href="data/proyeccion_semanal.html" style="--c:var(--accent)">

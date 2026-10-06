@@ -437,6 +437,8 @@ button,select,input{font-family:inherit}
 .brand .wrap{padding:20px 16px 16px}
 .brand .sub{color:#c9d9ec;margin:0}
 .brand a{color:#fff}
+.brand .back{display:inline-block;margin-bottom:8px;font-size:13px;text-decoration:none;opacity:.85}
+.brand .back:hover{opacity:1;text-decoration:underline}
 h1{font-size:26px;margin:0 0 2px;font-weight:700}
 h2{font-size:17px;margin:0;color:var(--navy)}
 .sub{color:var(--ink2);margin:0 0 16px}
@@ -496,6 +498,7 @@ td.na{color:var(--muted)}
 </head>
 <body>
 <header class="brand"><div class="wrap">
+  <a class="back" href="../index.html">← Inicio</a>
   <h1>Proyección Semanal de la Demanda del Sistema de Transporte</h1>
   <p class="sub" id="sub"></p>
 </div></header>

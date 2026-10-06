@@ -6,28 +6,27 @@
 <title>Desarrollo ENARGAS</title>
 <style>
 :root{color-scheme:light;
---bg:#f4f4f2;--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--muted:#77756f;--line:#e4e3de;--accent:#2a78d6;--s2:#eb6834}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;
---bg:#111110;--surface:#1a1a19;--ink:#fff;--ink2:#c3c2b7;--muted:#97968d;--line:#2e2e2b;--accent:#3987e5;--s2:#d95926}}
-:root[data-theme="dark"]{color-scheme:dark;
---bg:#111110;--surface:#1a1a19;--ink:#fff;--ink2:#c3c2b7;--muted:#97968d;--line:#2e2e2b;--accent:#3987e5;--s2:#d95926}
+/* Paleta LPS Energy */
+--bg:#f4f4f4;--surface:#fff;--ink:#000;--ink2:#333366;--muted:#666;--line:#d6d6d6;
+--navy:#000033;--accent:#006633;--s2:#333366}
 *{box-sizing:border-box}
 body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);
   font:16px/1.5 Calibri,Carlito,"Segoe UI",Arial,sans-serif;display:flex;flex-direction:column}
-header{max-width:1100px;width:100%;margin:0 auto;padding:32px 16px 8px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+header{background:var(--navy);color:#fff;border-bottom:4px solid var(--accent)}
+header .in{max-width:1100px;margin:0 auto;padding:28px 16px 22px;display:flex;justify-content:space-between;align-items:center;gap:16px}
 .logo{flex:none;height:110px;width:auto;background:#fff;border-radius:8px;padding:6px 10px}
 @media (max-width:640px){.logo{height:64px}}
-h1{font-size:26px;margin:0 0 4px;letter-spacing:-.01em}
-.sub{color:var(--ink2);margin:0}
+h1{font-size:28px;margin:0 0 4px;font-weight:700}
+.sub{color:#c9d9ec;margin:0}
 main{flex:1;max-width:1100px;width:100%;margin:0 auto;padding:24px 16px 40px;
   display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:20px;align-content:start}
 a.op{display:flex;flex-direction:column;gap:10px;min-height:260px;padding:28px;text-decoration:none;color:inherit;
-  background:var(--surface);border:1px solid var(--line);border-radius:14px;border-top:4px solid var(--c);
+  background:var(--surface);border:1px solid var(--line);border-radius:6px;border-top:4px solid var(--c);
   transition:transform .12s ease,box-shadow .12s ease}
 a.op:hover,a.op:focus-visible{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.10);outline:none}
 a.op:focus-visible{box-shadow:0 0 0 3px var(--c)}
-.ico{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;background:var(--c);color:#fff}
-.op h2{font-size:20px;margin:6px 0 0}
+.ico{width:44px;height:44px;border-radius:6px;display:grid;place-items:center;background:var(--c);color:#fff}
+.op h2{font-size:21px;margin:6px 0 0;color:var(--navy)}
 .op p{margin:0;color:var(--ink2)}
 .op ul{margin:0;padding-left:18px;color:var(--ink2);font-size:14px}
 .go{margin-top:auto;font-weight:600;color:var(--c)}
@@ -36,13 +35,13 @@ footer{max-width:1100px;width:100%;margin:0 auto;padding:0 16px 24px;color:var(-
 </style>
 </head>
 <body>
-<header>
+<header><div class="in">
   <div>
     <h1>Desarrollo ENARGAS</h1>
     <p class="sub">Datos operativos del sistema de transporte de gas natural publicados por ENARGAS.</p>
   </div>
   <img class="logo" src="assets/logo_lps.jpg" alt="LPS Energy">
-</header>
+</div></header>
 <main>
   <a class="op" href="data/proyeccion_semanal.html" style="--c:var(--accent)">
     <div class="ico" aria-hidden="true">
